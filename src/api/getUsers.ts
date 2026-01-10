@@ -18,10 +18,17 @@ const getUsersAxios = async <TResponse>(
   try {
     const response = await apiClient.get<TResponse>("/users", {
       signal: controller.signal,
+      timeout: 10000,
     });
     return response.data;
   } catch (error) {
     const err = error as AxiosError<any>;
+    if (err.code === "ECONNABORTED") {
+      throw new Error("Request timed out : " + err.message);
+    }
+    if (axios.isCancel(err)) {
+      throw new Error("Request cancelled : " + err.message);
+    }
     throw new Error(err.message || "Something went wrong");
   }
 };

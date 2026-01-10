@@ -12,9 +12,9 @@ const UserAPIExample = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<User[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const controller: AbortController = new AbortController();
 
   useEffect(() => {
-    const controller: AbortController = new AbortController();
     const loadUsers = async () => {
       try {
         const data = await getUsersAxios<User[]>(URL, controller);
@@ -72,7 +72,13 @@ const UserAPIExample = () => {
     }
   };
 
-  if (loading) return <UserProfileSkeleton />;
+  if (loading)
+    return (
+      <>
+        <UserProfileSkeleton />
+        <button onClick={() => controller.abort()}>Cancel Request</button>
+      </>
+    );
   if (error) return <h2>Error: {error}</h2>;
 
   return (
