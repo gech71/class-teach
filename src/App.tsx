@@ -1,13 +1,8 @@
-import TodoExample from "./components/TodoExample";
-import UserAPIExample from "./components/UserAPIExample";
 
 const App = () => {
   return (
-    <>
-      <UserAPIExample />
-      <TodoExample />
-    </>
-  );
-};
+    <div>App</div>
+  )
+}
 
-export default App;
+export default App
