@@ -14,6 +14,7 @@ import Card from "./components/Reusables/Card";
 import Forms from "./components/Reusables/Forms";
 import LayoutContainers from "./components/Reusables/LayoutContainers";
 import ReusableUIPatterns from "./components/Reusables/ReusableUIPatterns";
+import Dashboard from "./components/Reusables/Dashboard";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -80,6 +81,7 @@ const App = () => {
       <Forms />
       <LayoutContainers />
       <ReusableUIPatterns />
+      <Dashboard />
     </div>
   );
 };
