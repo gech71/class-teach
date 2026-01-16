@@ -9,6 +9,11 @@ import LabButton from "./components/LabButton";
 import MyCard from "./components/MyCard";
 import Responseive from "./components/Responseive";
 import StatusButton from "./components/StatusButton";
+import CompButton from "./components/Reusables/CompButton";
+import Card from "./components/Reusables/Card";
+import Forms from "./components/Reusables/Forms";
+import LayoutContainers from "./components/Reusables/LayoutContainers";
+import ReusableUIPatterns from "./components/Reusables/ReusableUIPatterns";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -47,7 +52,7 @@ const App = () => {
       <Lab2Tailwind size="medium">Medium Tailwind Button</Lab2Tailwind>
       <Lab2Tailwind size="large">Large Tailwind Button</Lab2Tailwind>
 
-      <div className="min-h-screen">
+      <div>
         <button
           onClick={toggleTheme}
           className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -58,6 +63,23 @@ const App = () => {
         <h1 className="text-3xl font-bold mt-4">Hello World</h1>
         <p className="mt-2">This is {theme} mode content</p>
       </div>
+      <CompButton variant="primary" onClick={() => alert("Primary Clicked")}>
+        Primary Button
+      </CompButton>
+      <CompButton
+        variant="secondary"
+        onClick={() => alert("Secondary Clicked")}
+      >
+        Secondary Button
+      </CompButton>
+      <CompButton variant="danger" onClick={() => alert("Danger Clicked")}>
+        Danger Button
+      </CompButton>
+      <CompButton disabled>Disabled Button</CompButton>
+      <Card />
+      <Forms />
+      <LayoutContainers />
+      <ReusableUIPatterns />
     </div>
   );
 };
