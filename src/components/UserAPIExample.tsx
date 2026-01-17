@@ -43,7 +43,7 @@ const UserAPIExample = () => {
   const handleUpdateUser = async (id: number) => {
     try {
       const updatedUser = await updateUser<User, UpdateUserDto>(
-        `https://jsonplaceholder.typicode.com/users/${id}`,
+        `${URL}/${id}`,
         {
           name: "Updated Name",
         }
@@ -58,7 +58,7 @@ const UserAPIExample = () => {
   };
   const handleDeleteUser = async (id: number) => {
     try {
-      await deleteUser(`https://jsonplaceholder.typicode.com/users/${id}`);
+      await deleteUser(`${URL}/${id}`);
 
       // Remove user from UI state
       setData((prev) => prev?.filter((user) => user.id !== id) || null);
