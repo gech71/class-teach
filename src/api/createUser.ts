@@ -1,5 +1,3 @@
-import axios, { AxiosError } from "axios";
-
 const createUser = async <TResponse, TBody>(
   url: string,
   body: TBody
@@ -20,16 +18,4 @@ const createUser = async <TResponse, TBody>(
   return response.json();
 };
 
-const createUserAxios = async <TResponse, TBody>(
-  url: string,
-  body: TBody
-): Promise<TResponse> => {
-  try {
-    const response = await axios.post<TResponse>(url, body);
-    return response.data;
-  } catch (error) {
-    const err = error as AxiosError<any>;
-    throw new Error(err.message || "Something went wrong");
-  }
-};
-export { createUser, createUserAxios };
+export { createUser };

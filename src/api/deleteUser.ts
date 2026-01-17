@@ -1,5 +1,3 @@
-import axios, { AxiosError } from "axios";
-
 const deleteUser = async <TResponse = void>(
   url: string
 ): Promise<TResponse> => {
@@ -20,16 +18,4 @@ const deleteUser = async <TResponse = void>(
   return response.json();
 };
 
-const deleteUserAxios = async <TResponse = void>(
-  url: string
-): Promise<TResponse> => {
-  try {
-    const response = await axios.delete<TResponse>(url);
-    return response.data;
-  } catch (error) {
-    const err = error as AxiosError<any>;
-    throw new Error(err.message || "Something went wrong");
-  }
-};
-
-export { deleteUser, deleteUserAxios };
+export { deleteUser };

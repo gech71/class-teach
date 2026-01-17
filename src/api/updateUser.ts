@@ -1,5 +1,3 @@
-import axios, { AxiosError } from "axios";
-
 type HttpMethod = "PUT" | "PATCH";
 
 const updateUser = async <TResponse, TBody>(
@@ -23,22 +21,4 @@ const updateUser = async <TResponse, TBody>(
   return response.json();
 };
 
-const updateUserAxios = async <TResponse, TBody>(
-  url: string,
-  body: TBody,
-  method: HttpMethod = "PATCH"
-): Promise<TResponse> => {
-  try {
-    const response =
-      method === "PUT"
-        ? await axios.put<TResponse>(url, body)
-        : await axios.patch<TResponse>(url, body);
-
-    return response.data;
-  } catch (error) {
-    const err = error as AxiosError<any>;
-    throw new Error(err.message || "Something went wrong");
-  }
-};
-
-export { updateUser, updateUserAxios };
+export { updateUser };

@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
 import type { User, CreateUserDto, UpdateUserDto } from "../types/user";
-import { getUsers, getUsersAxios } from "../api/getUsers";
-import { createUser, createUserAxios } from "../api/createUser";
-import { updateUser, updateUserAxios } from "../api/updateUser";
-import { deleteUser, deleteUserAxios } from "../api/deleteUser";
-import Loading from "./Loading";
-import UserProfileSkeleton from "./UserProfileSkeleton";
+import { getUsers } from "../api/getUsers";
+import { createUser } from "../api/createUser";
+import { updateUser } from "../api/updateUser";
+import { deleteUser } from "../api/deleteUser";
 
 const UserAPIExample = () => {
   const URL: string = "https://jsonplaceholder.typicode.com/users";
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<User[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const controller: AbortController = new AbortController();
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const data = await getUsersAxios<User[]>(URL, controller);
+        const data = await getUsers<User[]>(URL);
         setData(data);
       } catch (err: any) {
         setError(err.message);
@@ -27,13 +24,11 @@ const UserAPIExample = () => {
     };
 
     loadUsers();
-
-    return () => controller.abort();
   }, []);
 
   const handleCreateUser = async () => {
     try {
-      const newUser = await createUserAxios<User, CreateUserDto>(URL, {
+      const newUser = await createUser<User, CreateUserDto>(URL, {
         name: "John Doe",
         username: "Jhon",
         email: "john@test.com",
@@ -47,7 +42,7 @@ const UserAPIExample = () => {
 
   const handleUpdateUser = async (id: number) => {
     try {
-      const updatedUser = await updateUserAxios<User, UpdateUserDto>(
+      const updatedUser = await updateUser<User, UpdateUserDto>(
         `https://jsonplaceholder.typicode.com/users/${id}`,
         {
           name: "Updated Name",
@@ -63,7 +58,7 @@ const UserAPIExample = () => {
   };
   const handleDeleteUser = async (id: number) => {
     try {
-      await deleteUserAxios(`https://jsonplaceholder.typicode.com/users/${id}`);
+      await deleteUser(`https://jsonplaceholder.typicode.com/users/${id}`);
 
       // Remove user from UI state
       setData((prev) => prev?.filter((user) => user.id !== id) || null);
@@ -75,8 +70,7 @@ const UserAPIExample = () => {
   if (loading)
     return (
       <>
-        <UserProfileSkeleton />
-        <button onClick={() => controller.abort()}>Cancel Request</button>
+        <h2>Loading...</h2>
       </>
     );
   if (error) return <h2>Error: {error}</h2>;
