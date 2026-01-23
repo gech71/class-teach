@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchTasks } from "./features/tasks/taskSlice";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import TaskFilterButtons from "./components/TaskFilter";
 
 const App = () => {
   const dispatch = useDispatch<any>();
@@ -19,6 +20,7 @@ const App = () => {
         </h1>
 
         <TaskForm />
+        <TaskFilterButtons />
         <TaskList />
       </div>
     </div>
