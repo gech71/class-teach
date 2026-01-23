@@ -7,7 +7,7 @@ import { type Task, type TaskFilter } from "./taskTypes";
 
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
   const res = await fetch(
-    "https://jsonplaceholder.typicode.com/todos?_limit=5",
+    "https://jsonplaceholder.typicode.com/todos?_limit=15",
   );
   return (await res.json()) as Task[];
 });
@@ -47,7 +47,7 @@ const taskSlice = createSlice({
     },
     editTask: (state, action: PayloadAction<{ id: number; title: string }>) => {
       const task = state.tasks.find((t) => t.id === action.payload.id);
-      if (task) {
+      if (task && !task.completed) {
         task.title = action.payload.title;
       }
     },
@@ -64,5 +64,6 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, toggleTask, deleteTask, setFilter, editTask } = taskSlice.actions;
+export const { addTask, toggleTask, deleteTask, setFilter, editTask } =
+  taskSlice.actions;
 export default taskSlice.reducer;

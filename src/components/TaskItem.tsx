@@ -43,12 +43,14 @@ const TaskItem = ({ task }: Props) => {
           ✔
         </button>
       ) : (
-        <button
-          onClick={() => setIsEditing(true)}
-          className="text-blue-500 mr-2"
-        >
-          ✏️
-        </button>
+        task.completed || (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="text-blue-500 mr-2"
+          >
+            ✏️
+          </button>
+        )
       )}
 
       <button
