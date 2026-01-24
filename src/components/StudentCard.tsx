@@ -16,7 +16,7 @@ const StudentCard = ({ student, onEdit }: StudentCardProps) => {
       </div>
 
       <p className="text-gray-600 mb-1">📧 {student.email}</p>
-      <p className="text-gray-600 mb-3">🏫 {student.department}</p>
+      <p className="text-gray-600 mb-3">🏬 {student.department}</p>
 
       <button onClick={() => onEdit(student)} className="btn-secondary w-full">
         Edit Profile

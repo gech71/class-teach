@@ -1,4 +1,5 @@
 export const formatAcademicYear = (year: number): string => {
+  // An object type whose keys are of type K and whose values are of type V”
   const suffixes: Record<number, string> = {
     1: "1st Year",
     2: "2nd Year",
