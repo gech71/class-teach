@@ -1,4 +1,4 @@
-import { type Student } from "../models/Student";
+import type { Student } from "../models/Student";
 
 interface StudentCardProps {
   student: Student;

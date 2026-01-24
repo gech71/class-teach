@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { type Student } from "../models/Student";
+import type { Student } from "../models/Student";
 import { useForm } from "../hooks/useForm";
 import { formatAcademicYear } from "../utils/yearFormatter";
 import { validateStudent } from "../utils/validators/studentValidator";

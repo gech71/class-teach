@@ -1,4 +1,4 @@
-import { type Student } from "../models/Student";
+import type { Student } from "../models/Student";
 export const studentsData: Student[] = [
   {
     id: 1,
