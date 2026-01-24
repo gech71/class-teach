@@ -4,6 +4,7 @@ import StudentForm from "./components/StudentForm";
 import { studentsData } from "./data/students";
 import { type Student } from "./models/Student";
 
+
 const App = () => {
   const [students, setStudents] = useState<Student[]>(studentsData);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
