@@ -16,7 +16,13 @@ const TaskList = () => {
 
   if (loading) return <TaskListLoading />;
 
-  if (error) return <p className="text-red-500">Error: {error}</p>;
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center p-6 bg-red-100 rounded-lg shadow-md">
+        <p className="text-red-700 font-semibold text-lg">Error</p>
+        <p className="text-red-600 mt-1">{error}</p>
+      </div>
+    );
   return (
     <div className="space-y-3">
       {filteredTasks.map((task) => (

@@ -57,8 +57,7 @@ const taskSlice = createSlice({
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.loading = false;
-        state.tasks = [];
-        state.error = action.error.message || "Failed to fetch tasks";
+        state.error = action.error.message || "Failed to fetch tasks"; 
       });
   },
 });
