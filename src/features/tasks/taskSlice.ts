@@ -32,7 +32,12 @@ const taskSlice = createSlice({
       if (task) task.completed = !task.completed;
     },
     deleteTask: (state, action: { payload: number }) => {
-      state.tasks = state.tasks.filter((t) => t.id !== action.payload);
+      state.tasks = state.tasks.filter((t) => {
+        if (t.id === action.payload) {
+          return t.completed; // keep if completed, so only delete if not completed
+        }
+        return true;
+      });
     },
     setFilter: (state, action: { payload: TaskFilter }) => {
       state.filter = action.payload;
@@ -57,7 +62,7 @@ const taskSlice = createSlice({
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch tasks"; 
+        state.error = action.error.message || "Failed to fetch tasks";
       });
   },
 });
