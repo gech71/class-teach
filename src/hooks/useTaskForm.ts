@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export const useTaskForm = () => {
-  const [title, setTitle] = useState("");
-  const [error, setError] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const validate = () => {
     if (!title.trim()) {
@@ -13,7 +13,7 @@ export const useTaskForm = () => {
       setError("Task title must be at least 3 characters");
       return false;
     }
-    setError("");
+    setError(null);
     return true;
   };
 

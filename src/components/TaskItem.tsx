@@ -40,7 +40,7 @@ const TaskItem = ({ task }: Props) => {
 
       {isEditing ? (
         <button onClick={handleSave} className="text-green-600 font-bold mr-2">
-          ✔
+          ✔️
         </button>
       ) : (
         task.completed || (
@@ -57,7 +57,7 @@ const TaskItem = ({ task }: Props) => {
         onClick={() => dispatch(deleteTask(task.id))}
         className="text-red-500"
       >
-        ✕
+        ❌
       </button>
     </div>
   );

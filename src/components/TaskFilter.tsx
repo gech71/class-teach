@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { type RootState } from "../app/store";
-import { setFilter } from "../features/tasks/taskSlice";
+import { setFilter, type TaskState } from "../features/tasks/taskSlice";
 import { type TaskFilter } from "../features/tasks/taskTypes";
 
 const filters: TaskFilter[] = ["all", "active", "completed"];
 
 const TaskFilterButtons = () => {
   const dispatch = useDispatch();
-  const activeFilter = useSelector((state: RootState) => state.tasks.filter);
+  const activeFilter = useSelector(
+    (state: { tasks: TaskState }) => state.tasks.filter,
+  );
 
   return (
     <div className="flex justify-center gap-3 mb-4">

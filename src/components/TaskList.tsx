@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
-import { type RootState } from "../app/store";
 import TaskItem from "./TaskItem";
+import type { TaskState } from "../features/tasks/taskSlice";
+import TaskListLoading from "./TaskListLoading";
 
 const TaskList = () => {
-  const { tasks, loading, filter } = useSelector(
-    (state: RootState) => state.tasks,
+  const { tasks, loading, filter, error } = useSelector(
+    (state: { tasks: TaskState }) => state.tasks,
   );
 
   const filteredTasks = tasks.filter((task) => {
@@ -13,8 +14,9 @@ const TaskList = () => {
     return true;
   });
 
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <TaskListLoading />;
 
+  if (error) return <p className="text-red-500">Error: {error}</p>;
   return (
     <div className="space-y-3">
       {filteredTasks.map((task) => (

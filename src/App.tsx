@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTasks } from "./features/tasks/taskSlice";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import TaskFilterButtons from "./components/TaskFilter";
+import { fetchTasks } from "./features/tasks/taskThunk";
 
 const App = () => {
   const dispatch = useDispatch<any>();

@@ -1,26 +1,18 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  type PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { type Task, type TaskFilter } from "./taskTypes";
+import { fetchTasks } from "./taskThunk";
 
-export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
-  const res = await fetch(
-    "https://jsonplaceholder.typicode.com/todos?_limit=15",
-  );
-  return (await res.json()) as Task[];
-});
-
-interface TaskState {
+export interface TaskState {
   tasks: Task[];
   loading: boolean;
   filter: TaskFilter;
+  error: string | null;
 }
 
 const initialState: TaskState = {
   tasks: [],
   loading: false,
+  error: null,
   filter: "all",
 };
 
@@ -28,24 +20,24 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<string>) => {
+    addTask: (state, action: { payload: string }) => {
       state.tasks.unshift({
         id: Date.now(),
         title: action.payload,
         completed: false,
       });
     },
-    toggleTask: (state, action: PayloadAction<number>) => {
+    toggleTask: (state, action: { payload: number }) => {
       const task = state.tasks.find((t) => t.id === action.payload);
       if (task) task.completed = !task.completed;
     },
-    deleteTask: (state, action: PayloadAction<number>) => {
+    deleteTask: (state, action: { payload: number }) => {
       state.tasks = state.tasks.filter((t) => t.id !== action.payload);
     },
-    setFilter: (state, action: PayloadAction<TaskFilter>) => {
+    setFilter: (state, action: { payload: TaskFilter }) => {
       state.filter = action.payload;
     },
-    editTask: (state, action: PayloadAction<{ id: number; title: string }>) => {
+    editTask: (state, action: { payload: { id: number; title: string } }) => {
       const task = state.tasks.find((t) => t.id === action.payload.id);
       if (task && !task.completed) {
         task.title = action.payload.title;
@@ -56,10 +48,17 @@ const taskSlice = createSlice({
     builder
       .addCase(fetchTasks.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.tasks = action.payload;
         state.loading = false;
+        state.error = null;
+      })
+      .addCase(fetchTasks.rejected, (state, action) => {
+        state.loading = false;
+        state.tasks = [];
+        state.error = action.error.message || "Failed to fetch tasks";
       });
   },
 });
