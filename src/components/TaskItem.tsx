@@ -53,7 +53,7 @@ const TaskItem = ({ task }: Props) => {
         )
       )}
 
-      {task.completed && (
+      {!task.completed && (
         <button
           onClick={() => dispatch(deleteTask(task.id))}
           className="text-red-500"
